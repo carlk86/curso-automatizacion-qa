@@ -2,6 +2,7 @@ package automatizacion;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,7 +40,16 @@ public class TC002ValidacionLogin {
      //Validar funcionalidad de login 
      @Test
      public void loginExitoso(){
-        
+          driver.get("https://practicetestautomation.com/practice-test-login/");
+
+          driver.findElement(By.id("username"))
+                  .sendKeys("student");
+
+          driver.findElement(By.id("password"))
+                  .sendKeys("Password123");  
+
+          driver.findElement(By.id("submit"))
+                  .click();               
      }
 
      //Acciones que se van a ejecutar despues de cada test
