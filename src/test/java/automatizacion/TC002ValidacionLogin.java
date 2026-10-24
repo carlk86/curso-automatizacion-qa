@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TC002ValidacionLogin {
 //Script para validasr el login page
@@ -25,7 +27,7 @@ public class TC002ValidacionLogin {
 
         //oBTENER TITULO DE NUETRA PAGINA
         String tituloActual = driver.getTitle();
-        String tituloEsperado = "Test Login"
+        String tituloEsperado = "Test Login";
 
 
         Assertions.assertEquals(
@@ -56,7 +58,7 @@ public class TC002ValidacionLogin {
      @AfterEach
      public void cerrarSesion(){
 
-        drver.quit();
+        driver.quit();
      }
 
 }
