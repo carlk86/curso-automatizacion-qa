@@ -23,7 +23,7 @@ public class TC002ValidacionLogin {
      @Test 
      public void  validarTituloDeLaPagina(){
          //Abri nuestro navegador
-         driver.get("https://practicetestautomation.com/practice-test-login/");
+         driver.get("https://the-internet.herokuapp.com/login");
 
         //oBTENER TITULO DE NUETRA PAGINA
         String tituloActual = driver.getTitle();
@@ -35,20 +35,20 @@ public class TC002ValidacionLogin {
             tituloActual, 
             "El titulo esperado no coincide con lo esperado");
 
-         System.out.println("Titulo fue validado correctamente")   
+         System.out.println("Titulo fue validado correctamente");   
 
      } 
 
      //Validar funcionalidad de login 
      @Test
      public void loginExitoso(){
-          driver.get("https://practicetestautomation.com/practice-test-login/");
+          driver.get("https://the-internet.herokuapp.com/login");
 
           driver.findElement(By.id("username"))
-                  .sendKeys("student");
+                  .sendKeys("tomsmith");
 
           driver.findElement(By.id("password"))
-                  .sendKeys("Password123");  
+                  .sendKeys("SuperSecretPassword!");  
 
           driver.findElement(By.id("submit"))
                   .click();               
@@ -61,4 +61,5 @@ public class TC002ValidacionLogin {
         driver.quit();
      }
 
+     
 }
