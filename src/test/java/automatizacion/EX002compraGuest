@@ -1,0 +1,91 @@
+package automatizacion;
+
+import java.time.Duration;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class EX002compraGuest {
+
+   private WebDriver driver;
+   private WebDriverWait wait;
+
+ @BeforeEach 
+    public void inicializarNavegador() {
+        //Inicializar driver
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        //Inicializar wait
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        driver.get("https://teststore.automationtesting.co.uk/index.php");  
+
+     }
+
+@Test 
+    public void compraComoInvitado() {
+      
+
+        // Navegar en el catalogo y seleccionar prodducto
+        
+     
+        WebElement selecProducto = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".product-miiniature a.product-thumbnail")));
+        selecProducto.click();
+
+        //Agregar producto
+
+        WebElement agrAlCarroBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.add-to-cart")));
+        agrAlCarroBtn.click();
+
+        //Acceder al carrito
+
+        WebElement accAlCarroBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.cart-content-btn a.btn-primary")));
+        accAlCarroBtn.click();
+
+        //Validacion 2 	Verificar que los productos se encuentren en el carrito.
+
+        WebElement ProdEnCarrito = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.cart-item")));
+        Assertions.assertEquals(ProdEnCarrito.isDisplayed(), "No hay productos en el carrito");
+
+        // Iniciar el proceso de checkout
+
+        WebElement checkoutBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.checkout a.btn-primary")));
+        checkoutBtn.click();
+
+        // Completar informacion 
+
+        WebElement ingDatos = wait.until(ExpectedConditions.elementToBeClickable(By.id("field-id_garden-1")));
+        ingDatos.click();
+
+        driver.findElement(By.id("field-firstname")).sendKeys("Carlo");
+        driver.findElement(By.id("field-lastname")).sendKeys("Morata");
+        driver.findElement(By.id("field-email")).sendKeys("carlomorata@mail.com");
+
+        driver.findElement(By.name("customer_privacy")).click();
+        driver.findElement(By.name("psgdpr")).click();
+    
+        driver.findElement(By.name("continue")).click();
+
+        //Formulario de direccion
+        WebElement ingDirecc = wait.until(ExpectedConditions.elementToBeClickable(By.id("field-address1")));
+        ingDirecc.sendKeys("Calle la gloria 123");
+
+    
+
+    }
+
+        @AfterEach
+     public void cerrarSesion(){
+
+        driver.quit();
+     }
+
+
+}    

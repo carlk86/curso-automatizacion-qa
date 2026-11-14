@@ -45,10 +45,9 @@ public class EX001compraDeProducto {
         WebElement loginBtn = driver.findElement(By.id("submit-login"));
         loginBtn.click();
 
-        wait.until(ExpectedConditions.invisibilityOf(loginBtn));
-
+    
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.logout")));
-        loginBtn.click();
+        
 
         // Validacion 1 Verificar que el usuario haya iniciado sesión correctamente
            WebElement singOutBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.logout")));
@@ -111,6 +110,11 @@ public class EX001compraDeProducto {
 
     }
 
-       
+        @AfterEach
+     public void cerrarSesion(){
+
+        driver.quit();
+     }
+
 
 }    
